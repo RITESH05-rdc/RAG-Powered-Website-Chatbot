@@ -34,3 +34,18 @@ def search(query):
     results = [chunks[i] for i in I[0]]
 
     return results
+
+import requests
+
+def ask_llm(prompt):
+
+    response = requests.post(
+        "http://localhost:11434/api/generate",
+        json={
+            "model": "mistral",
+            "prompt": prompt,
+            "stream": False
+        }
+    )
+
+    return response.json()["response"]
